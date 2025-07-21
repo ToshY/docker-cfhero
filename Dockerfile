@@ -2,8 +2,6 @@ FROM golang:1.23 AS build
 
 ARG APPLICATION_VERSION
 
-LABEL maintainer="ToshY (github.com/ToshY)"
-
 WORKDIR /app
 
 RUN <<EOT sh
@@ -17,6 +15,8 @@ RUN go mod download
 RUN CGO_ENABLED=0 GOOS=linux go build -o /cf-hero ./cmd/cf-hero
 
 FROM gcr.io/distroless/base-debian12 AS release
+
+LABEL maintainer="ToshY (github.com/ToshY)"
 
 WORKDIR /
 
